@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent, JSX } from "react";
 
-function Form(props) {
-    const [name, setName] = useState("");
+interface FormProps { addTask: (name: string) => void}
 
-    function handleChange(event) {
+function Form({ addTask }: FormProps): JSX.Element {
+    const [name, setName] = useState<string>("");
+
+    function handleChange(event: ChangeEvent<HTMLInputElement>) {
         setName(event.target.value)
     }
 
-    function handleSubmit(event) {
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    props.addTask(name);
+    addTask(name);
     setName("");
     }
     
